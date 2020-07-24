@@ -25,4 +25,4 @@ const e = new Employee();
 // const Manager = new Employee();
 // const Intern = new Employee();
 // const Engineer = new Employee();
-module.exports(Employee);
+module.exports = Employee;
