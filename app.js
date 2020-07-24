@@ -13,6 +13,11 @@ const render = require("./lib/htmlRenderer");
 inquirer.prompt([
   {
     type: "input",
+    name: "role",
+    message: "what is your role within the company?",
+  },
+  {
+    type: "input",
     name: "name",
     message: "What is your name?",
   },
@@ -40,6 +45,11 @@ inquirer.prompt([
     type: "input",
     name: "github",
     message: "What is your guthub username?",
+  },
+  {
+    type: "input",
+    name: "new employee",
+    message: "Would you like to add another employee?",
   },
 ]);
 // Write code to use inquirer to gather information about the development team members,
