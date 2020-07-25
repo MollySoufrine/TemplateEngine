@@ -10,6 +10,42 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+function engineerQuestions(data){
+    inquirer.prompt([{
+              
+        type: "input",
+        name: "github",
+        message: "What is your guthub username?",
+      
+}]).then(function(results){
+    //create new employee
+    //call userInput again
+})
+}
+function internQuestions(data){
+inquirer.prompt([{
+    type: "input",
+    name: "school",
+    message: "What school did you attend?",
+}]).then(function(results){
+ //create new employee
+    //call userInput again
+})
+}
+function managerQuestions(data){
+    inquirer.prompt([{
+              
+        type: "input",
+        name: "office number",
+        message: "What is your office number?",
+      
+    }]).then(function(data){
+        //create new employee
+    //call userInput again
+    })
+}
+
+
 function userInput(){
     inquirer.prompt([
         {
@@ -33,32 +69,20 @@ function userInput(){
           message: "What is your employee id?",
         },
       ])
-      .then(function(res){
-          if (res.role === 'Engineer')
-          inquirer.prompt([{
-              
-                  type: "input",
-                  name: "github",
-                  message: "What is your guthub username?",
-                
-          }])
-          else if (res.role === 'Intern')
-          inquirer.prompt([{
-              
-            type: "input",
-            name: "school",
-            message: "What school did you attend?",
+      .then(function(results){
+          switch (results.role){
+            case 'Engineer':
+                engineerQuestions(results);
+                  break;
+            case 'Intern':
+                break;
+            case 'Manager':
+                break;
+            default:
+          }
           
-    }])
-    else if (res.role === 'Manager')
-    inquirer.prompt([{
-              
-        type: "input",
-        name: "office number",
-        message: "What is your office number?",
-      
-}])
-      }
+        
+
     }
 
 
