@@ -10,48 +10,81 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-inquirer.prompt([
-  {
-    type: "input",
-    name: "role",
-    message: "what is your role within the company?",
-  },
-  {
-    type: "input",
-    name: "name",
-    message: "What is your name?",
-  },
-  {
-    type: "input",
-    name: "email",
-    message: "What is your email address?",
-  },
-  {
-    type: "input",
-    name: "id",
-    message: "What is your employee id?",
-  },
-  {
-    type: "input",
-    name: "school",
-    message: "What school did you attend?",
-  },
-  {
-    type: "input",
-    name: "office number",
-    message: "What is your office number?",
-  },
-  {
-    type: "input",
-    name: "github",
-    message: "What is your guthub username?",
-  },
-  {
-    type: "input",
-    name: "new employee",
-    message: "Would you like to add another employee?",
-  },
-]);
+function userInput(){
+    inquirer.prompt([
+        {
+          type: "input",
+          name: "role",
+          message: "what is your role within the company?",
+        },
+        {
+          type: "input",
+          name: "name",
+          message: "What is your name?",
+        },
+        {
+          type: "input",
+          name: "email",
+          message: "What is your email address?",
+        },
+        {
+          type: "input",
+          name: "id",
+          message: "What is your employee id?",
+        },
+      ])
+      .then(function(res){
+          if (res.role === 'Engineer')
+          inquirer.prompt([{
+              
+                  type: "input",
+                  name: "github",
+                  message: "What is your guthub username?",
+                
+          }])
+          else if (res.role === 'Intern')
+          inquirer.prompt([{
+              
+            type: "input",
+            name: "school",
+            message: "What school did you attend?",
+          
+    }])
+    else if (res.role === 'Manager')
+    inquirer.prompt([{
+              
+        type: "input",
+        name: "office number",
+        message: "What is your office number?",
+      
+}])
+      }
+    }
+
+
+
+
+//   {
+//     type: "input",
+//     name: "school",
+//     message: "What school did you attend?",
+//   },
+//   {
+//     type: "input",
+//     name: "office number",
+//     message: "What is your office number?",
+//   },
+//   {
+//     type: "input",
+//     name: "github",
+//     message: "What is your guthub username?",
+//   },
+//   {
+//     type: "input",
+//     name: "new employee",
+//     message: "Would you like to add another employee?",
+//   },
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 

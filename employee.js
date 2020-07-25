@@ -6,20 +6,20 @@ class Employee {
     this.role = role;
   }
   getName() {
-    return `My employee's name is ${this.name}`;
+    return this.name;
   }
   getId() {
-    return `My employee ID is ${this.id}`;
+    return this.id;
   }
   getEmail() {
-    return `My employee email is ${this.email}`;
+    return this.email;
   }
   getRole() {
-    return `My role is ${this.role}`;
+    return "Employee";
   } //Returns employee
 }
 
-const e = new Employee();
+const employee = new Employee("Alice", 100, "test@test.com");
 // console.log(e.name);
 
 // const Manager = new Employee();
