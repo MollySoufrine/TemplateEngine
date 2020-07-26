@@ -8,106 +8,82 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+const render = require("./htmlRenderer");
+function engineerQuestions() {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "github",
+      message: "What is your GitHub user name?",
+    },
+  ]);
+}
+function internQuestions() {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "school",
+      message: "What is the name of your school?",
+    },
+  ]);
+}
+function managerQuestions() {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "office number",
+      message: "What is your office number?",
+    },
+  ]);
+}
 
-function engineerQuestions(data){
-    inquirer.prompt([{
-              
+function userInput() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "employeeChoice",
+        message: "Which type of team member would you like to add?",
+        choices: [
+          "Engineer",
+          "Intern",
+          "Manager",
+          "I don't want to add any more team members",
+        ],
+      },
+      {
         type: "input",
-        name: "github",
-        message: "What is your guthub username?",
-      
-}]).then(function(results){
-    //create new employee
-    //call userInput again
-})
-}
-function internQuestions(data){
-inquirer.prompt([{
-    type: "input",
-    name: "school",
-    message: "What school did you attend?",
-}]).then(function(results){
- //create new employee
-    //call userInput again
-})
-}
-function managerQuestions(data){
-    inquirer.prompt([{
-              
+        name: "name",
+        message: "Please enter your name.",
+      },
+      {
         type: "input",
-        name: "office number",
-        message: "What is your office number?",
-      
-    }]).then(function(data){
-        //create new employee
-    //call userInput again
-    })
+        name: "email",
+        message: "What is your email address?",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is your employee id number?",
+      },
+    ])
+    .then(function (results) {
+      switch (results.employeeChoice) {
+        case "Engineer":
+          engineerQuestions(results);
+          break;
+        case "Intern":
+          internQuestions(results);
+          break;
+        case "Manager":
+          managerQuestions(results);
+          break;
+        default:
+      }
+    });
 }
-
-
-function userInput(){
-    inquirer.prompt([
-        {
-          type: "input",
-          name: "role",
-          message: "what is your role within the company?",
-        },
-        {
-          type: "input",
-          name: "name",
-          message: "What is your name?",
-        },
-        {
-          type: "input",
-          name: "email",
-          message: "What is your email address?",
-        },
-        {
-          type: "input",
-          name: "id",
-          message: "What is your employee id?",
-        },
-      ])
-      .then(function(results){
-          switch (results.role){
-            case 'Engineer':
-                engineerQuestions(results);
-                  break;
-            case 'Intern':
-                break;
-            case 'Manager':
-                break;
-            default:
-          }
-          
-        
-
-    }
-
-
-
-
-//   {
-//     type: "input",
-//     name: "school",
-//     message: "What school did you attend?",
-//   },
-//   {
-//     type: "input",
-//     name: "office number",
-//     message: "What is your office number?",
-//   },
-//   {
-//     type: "input",
-//     name: "github",
-//     message: "What is your guthub username?",
-//   },
-//   {
-//     type: "input",
-//     name: "new employee",
-//     message: "Would you like to add another employee?",
-//   },
+userInput();
+render();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
