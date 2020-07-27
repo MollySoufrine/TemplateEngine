@@ -19,7 +19,6 @@ class Employee {
   } //Returns employee
 }
 
-const employee = new Employee("Alice", 100, "test@test.com");
 // console.log(e.name);
 
 // const Manager = new Employee();

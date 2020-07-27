@@ -1,6 +1,7 @@
-const Manager = require("./Manager");
-const Engineer = require("./Engineer");
-const Intern = require("./Intern");
+const Manager = require("./Manager.js");
+const Engineer = require("./Engineer.js");
+const Intern = require("./Intern.js");
+const Employee = require("./Employee.js");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -9,6 +10,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./htmlRenderer");
+
 function engineerQuestions() {
   inquirer.prompt([
     {
@@ -18,6 +20,7 @@ function engineerQuestions() {
     },
   ]);
 }
+
 function internQuestions() {
   inquirer.prompt([
     {
@@ -36,20 +39,16 @@ function managerQuestions() {
     },
   ]);
 }
+const employee = [];
 
 function userInput() {
   inquirer
     .prompt([
       {
         type: "list",
-        name: "employeeChoice",
+        name: "role",
         message: "Which type of team member would you like to add?",
-        choices: [
-          "Engineer",
-          "Intern",
-          "Manager",
-          "I don't want to add any more team members",
-        ],
+        choices: ["Engineer", "Intern", "Manager"],
       },
       {
         type: "input",
@@ -68,7 +67,7 @@ function userInput() {
       },
     ])
     .then(function (results) {
-      switch (results.employeeChoice) {
+      switch (results.role) {
         case "Engineer":
           engineerQuestions(results);
           break;
@@ -82,9 +81,26 @@ function userInput() {
       }
     });
 }
+const endQuestions = () => {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "endquestions",
+        message: "Would you like to enter another employee?",
+      },
+    ])
+    .then((answer) => {
+      switch (answer) {
+        case answer.endquestions:
+          break;
+        case (html = render(allEmployeesInfo)):
+          break;
+        default:
+      }
+    });
+};
 userInput();
-render();
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
