@@ -5,13 +5,13 @@ const Employee = require("./Employee.js");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-const employee = [];
+var employees = [];
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./htmlRenderer");
 
-function engineerQuestions() {
+function engineerQuestions(generalAnswers) {
   inquirer
     .prompt([
       {
@@ -20,10 +20,13 @@ function engineerQuestions() {
         message: "What is your GitHub user name?",
       },
     ])
-    .then(employee.push(results));
+    .then(function (engineerAnswer) {
+      employeeAnswers = { ...generalAnswers, github: engineerAnswer.github };
+      employees.push(employeeAnswers);
+    });
 }
 
-function internQuestions() {
+function internQuestions(generalAnswers) {
   inquirer
     .prompt([
       {
@@ -32,19 +35,28 @@ function internQuestions() {
         message: "What is the name of your school?",
       },
     ])
-    .then(employee.push(results));
+    .then(function (internAnswer) {
+      employeeAnswers = { ...generalAnswers, school: internAnswer.school };
+      employees.push(employeeAnswers);
+    });
 }
 
-function managerQuestions() {
+function managerQuestions(generalAnswers) {
   inquirer
     .prompt([
       {
         type: "input",
-        name: "office number",
+        name: "officenumber",
         message: "What is your office number?",
       },
     ])
-    .then(employee.push(results));
+    .then(function (managerAnswer) {
+      employeeAnswers = {
+        ...generalAnswers,
+        officenumber: managerAnswer.officenumber,
+      };
+      employees.push(employeeAnswers);
+    });
 }
 
 function userInput() {
@@ -72,21 +84,20 @@ function userInput() {
         message: "What is your employee id number?",
       },
     ])
-    .then(function (results) {
-      switch (results.role) {
+    .then(function (generalAnswers) {
+      switch (generalAnswers.role) {
         case "Engineer":
-          engineerQuestions(results);
+          engineerQuestions(generalAnswers);
           break;
         case "Intern":
-          internQuestions(results);
+          internQuestions(generalAnswers);
           break;
         case "Manager":
-          managerQuestions(results);
+          managerQuestions(generalAnswers);
           break;
         default:
       }
-    })
-    .then(employee.push(results));
+    });
 }
 // const endQuestions = () => {
 //   inquirer
@@ -98,12 +109,14 @@ function userInput() {
 //       },
 //     ])
 //     .then((answer) => {
-//       if(answer.endquestions === false)
+//       if(answer.endquestions === false){
+
+//       }
 //     });
 // };
 
 userInput();
-console.log(results);
+console.log(employees);
 // endQuestions();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
