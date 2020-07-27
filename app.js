@@ -20,10 +20,7 @@ function engineerQuestions() {
         message: "What is your GitHub user name?",
       },
     ])
-    .then((results) => {
-      // console.log(results);
-      employee.push(results);
-    });
+    .then(employee.push(results));
 }
 
 function internQuestions() {
@@ -35,10 +32,7 @@ function internQuestions() {
         message: "What is the name of your school?",
       },
     ])
-    .then((results) => {
-      // console.log(results);
-      employee.push(results);
-    });
+    .then(employee.push(results));
 }
 
 function managerQuestions() {
@@ -50,10 +44,7 @@ function managerQuestions() {
         message: "What is your office number?",
       },
     ])
-    .then((results) => {
-      // console.log(results);
-      employee.push(results);
-    });
+    .then(employee.push(results));
 }
 
 function userInput() {
@@ -94,22 +85,26 @@ function userInput() {
           break;
         default:
       }
-    });
+    })
+    .then(employee.push(results));
 }
-const endQuestions = () => {
-  inquirer
-    .prompt([
-      {
-        type: "confirm",
-        name: "endquestions",
-        message: "Would you like to enter another employee?",
-      },
-    ])
-    .then((answer) => {});
-};
+// const endQuestions = () => {
+//   inquirer
+//     .prompt([
+//       {
+//         type: "confirm",
+//         name: "endquestions",
+//         message: "Would you like to enter another employee?",
+//       },
+//     ])
+//     .then((answer) => {
+//       if(answer.endquestions === false)
+//     });
+// };
 
 userInput();
-endQuestions();
+console.log(results);
+// endQuestions();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
